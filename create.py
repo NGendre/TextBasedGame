@@ -1,5 +1,5 @@
 import inquirer
-import manipulateJsonObject as jsObj
+import service as sv
 
 
 def createMenu():
@@ -39,11 +39,11 @@ def defineStats():
 def newGame():
     questions = [
         inquirer.Text('gameName',
-                      message="What is the name of your game?"),
+                      message="What is the name of your game?",default=''),
         inquirer.Text('characterType',
-                      message="What type of character will the player incarnate?"),
-        inquirer.Confirm('nameChoicePlayer',
-                         message="Can the player choose his name?",default=True),
+                      message="What type of character will the player incarnate?",default=''),
+        inquirer.Text('nameChoicePlayer',
+                         message="What will be the default name?",default="John"),
         inquirer.Confirm('ageRestriction',
                          message="does the player have to be 18 and older?",default=True)
 
@@ -52,8 +52,8 @@ def newGame():
     answers = inquirer.prompt(questions)
 
 
-    jsObj.createGameJson(answers.get('gameName'),answers.get('characterType'),
-                         answers.get('nameChoicePlayer'),answers.get('ageRestriction'),stats)
+    sv.createGame(answers.get('gameName'), answers.get('characterType'),
+                  answers.get('nameChoicePlayer'), answers.get('ageRestriction'), stats)
 
 
 
